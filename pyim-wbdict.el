@@ -81,6 +81,19 @@
         (message "pyim 没有安装，pyim-wbdict 启用失败。")))))
 
 ;;;###autoload
+(defun pyim-wbdict-v86-jishuang-enable ()
+  "Add jishuang wubi dict (86 version) to pyim."
+  (interactive)
+  (let* ((dir (file-name-directory
+               (locate-library "pyim-wbdict.el")))
+         (file (concat dir "pyim-wbdict-v86-jishuang.pyim")))
+    (when (file-exists-p file)
+      (if (featurep 'pyim)
+          (pyim-extra-dicts-add-dict
+           `(:name "wbdict-v86-jishuang-elpa" :file ,file :elpa t))
+        (message "pyim 没有安装，pyim-wbdict 启用失败。")))))
+
+;;;###autoload
 (defun pyim-wbdict-v86-single-enable ()
   "Add wubi dict (86 version, single character) to pyim."
   (interactive)
