@@ -53,19 +53,8 @@
 
 ;;; Code:
 ;; * 代码                                                               :code:
-(require 'pyim)
-
-(pyim-scheme-add
- '(wubi
-   :document "五笔输入法。"
-   :class xingma
-   :first-chars "abcdefghijklmnopqrstuvwxyz"
-   :rest-chars "abcdefghijklmnopqrstuvwxyz'"
-   :code-prefix "wubi/" ;五笔词库中所有的 code 都以 "wubi/" 开头，防止和其它词库冲突。
-   :code-prefix-history (".") ;五笔词库以前使用 "." 做为 code-prefix.
-   :code-split-length 4 ;默认将用户输入切成 4 个字符长的 code 列表（不计算 code-prefix）
-   :code-maximum-length 4 ;五笔词库中，code 的最大长度（不计算 code-prefix）
-   :prefer-triggers nil))
+(require 'pyim-dict)
+(require 'pyim-scheme)
 
 ;;;###autoload
 (defun pyim-wbdict-v86-enable ()
@@ -75,10 +64,8 @@
                (locate-library "pyim-wbdict.el")))
          (file (concat dir "pyim-wbdict-v86.pyim")))
     (when (file-exists-p file)
-      (if (featurep 'pyim)
-          (pyim-extra-dicts-add-dict
-           `(:name "wbdict-v86-elpa" :file ,file :elpa t))
-        (message "pyim 没有安装，pyim-wbdict 启用失败。")))))
+      (pyim-extra-dicts-add-dict
+       `(:name "wbdict-v86-elpa" :file ,file :elpa t)))))
 
 ;;;###autoload
 (defun pyim-wbdict-v86-jishuang-enable ()
@@ -101,10 +88,8 @@
                (locate-library "pyim-wbdict.el")))
          (file (concat dir "pyim-wbdict-v86-single.pyim")))
     (when (file-exists-p file)
-      (if (featurep 'pyim)
-          (pyim-extra-dicts-add-dict
-           `(:name "wbdict-v86-single-elpa" :file ,file :elpa t))
-        (message "pyim 没有安装，pyim-wbdict 启用失败。")))))
+      (pyim-extra-dicts-add-dict
+       `(:name "wbdict-v86-single-elpa" :file ,file :elpa t)))))
 
 ;;;###autoload
 (defun pyim-wbdict-v98-enable ()
@@ -114,10 +99,8 @@
                (locate-library "pyim-wbdict.el")))
          (file (concat dir "pyim-wbdict-v98.pyim")))
     (when (file-exists-p file)
-      (if (featurep 'pyim)
-          (pyim-extra-dicts-add-dict
-           `(:name "wbdict-v98-elpa" :file ,file :elpa t))
-        (message "pyim 没有安装，pyim-wbdict 启用失败。")))))
+      (pyim-extra-dicts-add-dict
+       `(:name "wbdict-v98-elpa" :file ,file :elpa t)))))
 
 ;;;###autoload
 (defun pyim-wbdict-v98-morphe-enable ()
@@ -127,17 +110,11 @@
                (locate-library "pyim-wbdict.el")))
          (file (concat dir "pyim-wbdict-v98-morphe.pyim")))
     (when (file-exists-p file)
-      (if (featurep 'pyim)
-          (pyim-extra-dicts-add-dict
-           `(:name "wbdict-v98-morphe-elpa" :file ,file :elpa t))
-        (message "pyim 没有安装，pyim-wbdict 启用失败。")))))
+      (pyim-extra-dicts-add-dict
+       `(:name "wbdict-v98-morphe-elpa" :file ,file :elpa t)))))
 
-;;;###autoload
-(define-obsolete-function-alias 'pyim-wbdict-gbk-enable 'pyim-wbdict-v98-enable "0.0.1")
-(define-obsolete-function-alias 'pyim-wbdict-gb2312-enable 'pyim-wbdict-v98-enable "0.0.1")
 
 ;; * Footer
-
 (provide 'pyim-wbdict)
 
 ;;; pyim-wbdict.el ends here
